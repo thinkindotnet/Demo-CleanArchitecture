@@ -1,0 +1,23 @@
+﻿
+GET https://localhost:7123/api/Categories
+
+
+###
+
+GET https://localhost:7123/api/Categories/1
+Content-Type: application/json
+
+###
+
+GET https://localhost:7123/api/Categories/3
+Content-Type: text/xml
+
+
+###
+
+POST https://localhost:7123/api/Categories
+Content-Type: application/json
+
+{
+    "categoryId": 0
+}
