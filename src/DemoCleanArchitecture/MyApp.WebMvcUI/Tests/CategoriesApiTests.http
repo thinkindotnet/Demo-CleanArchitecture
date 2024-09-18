@@ -4,7 +4,7 @@ GET https://localhost:7123/api/Categories
 
 ###
 
-GET https://localhost:7123/api/Categories/1
+GET https://localhost:7123/api/Categories/4
 Content-Type: application/json
 
 ###
@@ -19,5 +19,50 @@ POST https://localhost:7123/api/Categories
 Content-Type: application/json
 
 {
+    "categoryId": 0,
+    "categoryName": "new category"
+}
+
+
+###
+
+
+POST https://localhost:7123/api/Categories
+Content-Type: application/json
+
+{
     "categoryId": 0
 }
+
+
+###
+
+
+POST https://localhost:7123/api/Categories
+Content-Type: application/json
+
+{
+    "categoryId": 0,
+    "categoryName": "1234567890123456789012345678901234567890123456789012"
+}
+
+
+###
+
+
+PUT https://localhost:7123/api/Categories/4
+Content-Type: application/json
+Accept: application/json
+
+{
+    "categoryId": 4,
+    "categoryName": "1234567890123456789012345678901234567890123456789012"
+}
+
+
+###
+
+
+DELETE https://localhost:7123/api/Categories/10
+Content-Type: application/json
+

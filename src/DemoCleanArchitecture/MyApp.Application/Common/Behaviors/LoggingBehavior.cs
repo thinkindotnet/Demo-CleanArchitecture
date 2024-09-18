@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 using MyApp.Application.Common.Interfaces;
 
-namespace MyApp.Application.Common.Behaviours;
+namespace MyApp.Application.Common.Behaviors;
 
-public class LoggingBehaviour<TRequest>
+public class LoggingBehavior<TRequest>
     : IRequestPreProcessor<TRequest> where TRequest : class
 {
 
@@ -15,7 +15,7 @@ public class LoggingBehaviour<TRequest>
     private readonly ICurrentUserService _currentUserService;
     private readonly IIdentityService _identityService;
 
-    public LoggingBehaviour(
+    public LoggingBehavior(
         ILogger<TRequest> logger,
         ICurrentUserService currentUserService,
         IIdentityService identityService)

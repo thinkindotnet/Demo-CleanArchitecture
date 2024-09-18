@@ -31,6 +31,9 @@ public static class ConfigureServices
             .AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(connectionString);
+
+                // for Database logging
+                // options.LogTo(Console.WriteLine);
             });
         if (environment.IsDevelopment())
         {
