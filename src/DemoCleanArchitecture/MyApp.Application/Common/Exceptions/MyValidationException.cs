@@ -2,6 +2,10 @@
 
 namespace MyApp.Application.Common.Exceptions;
 
+
+/// <summary>
+///     Represents the validation error on the model.
+/// </summary>
 public class MyValidationException
     : ApplicationException
 {

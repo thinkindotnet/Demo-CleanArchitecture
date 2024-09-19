@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using MyApp.Application.Common.Interfaces;
 using MyApp.Infrastructure.Data;
-using MyApp.Infrastructure.Data.Interceptors;
-using MyApp.Infrastructure.Identity;
+using MyApp.Infrastructure.Interceptors;
+using MyApp.Infrastructure.Services;
+
 
 namespace MyApp.Infrastructure;
+
 
 public static class ConfigureServices
 {
@@ -22,7 +22,6 @@ public static class ConfigureServices
     {
 
         const string connectionStringName = "DefaultConnection";
-
         var connectionString 
             = configuration.GetConnectionString(connectionStringName)
               ?? throw new InvalidOperationException($"Connection String {connectionStringName} is not found.");
@@ -31,27 +30,25 @@ public static class ConfigureServices
             .AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(connectionString);
-
-                // for Database logging
-                // options.LogTo(Console.WriteLine);
             });
+
         if (environment.IsDevelopment())
         {
             services
                 .AddDatabaseDeveloperPageExceptionFilter();
         }
 
-        services.AddScoped<IApplicationDbContext>(serviceProvider =>
-        {
-            return serviceProvider.GetRequiredService<ApplicationDbContext>();
-        });
+        services
+            .AddScoped<IApplicationDbContext>(serviceProvider =>
+            {
+                return serviceProvider.GetRequiredService<ApplicationDbContext>();
+            });
 
+        services
+            .AddScoped<ApplicationDbContextInitializer>();
 
-        services.AddScoped<ApplicationDbContextInitializer>();
-
-        services.AddScoped<AuditableEntitySaveChangesInterceptor>();
-
-
+        services
+            .AddScoped<AuditableEntitySaveChangesInterceptor>();
 
         services
             .AddDefaultIdentity<IdentityUser>(options =>
@@ -60,7 +57,8 @@ public static class ConfigureServices
             })
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
-        services.AddScoped<IIdentityService, IdentityService>();
+        services
+            .AddScoped<IIdentityService, IdentityService>();
 
         return services;
     }

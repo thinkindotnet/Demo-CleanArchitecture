@@ -1,10 +1,14 @@
-﻿
-using MediatR;
+﻿using Microsoft.Extensions.Logging;
 
-using Microsoft.Extensions.Logging;
 
 namespace MyApp.Application.Common.Behaviors;
 
+
+/// <summary>
+///     Custom Unhandled Exception Behavior middleware.
+/// </summary>
+/// <typeparam name="TRequest">Request pipeline object.</typeparam>
+/// <typeparam name="TResponse">Response pipeline object.</typeparam>
 public class UnhandledExceptionBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse> where TRequest: IRequest<TResponse>
 {

@@ -1,12 +1,17 @@
-﻿
-using MediatR.Pipeline;
+﻿using MediatR.Pipeline;
 
 using Microsoft.Extensions.Logging;
 
 using MyApp.Application.Common.Interfaces;
 
+
 namespace MyApp.Application.Common.Behaviors;
 
+
+/// <summary>
+///     Custom Logging Behavior middleware.
+/// </summary>
+/// <typeparam name="TRequest">Request pipeline object.</typeparam>
 public class LoggingBehavior<TRequest>
     : IRequestPreProcessor<TRequest> where TRequest : class
 {

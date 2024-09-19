@@ -1,13 +1,10 @@
-﻿using AutoMapper;
-
-using FluentAssertions;
-
-using MyApp.Application.ManageCategoriesFeature.DTOs;
+﻿using MyApp.Application.ManageCategoriesFeature.DTOs;
 using MyApp.Application.ManageCategoriesFeature.Queries.GetAllQuery;
 using MyApp.Infrastructure.Data;
 using MyApp.xUnitTests.Common;
 
 using Xunit.Abstractions;
+
 
 namespace MyApp.xUnitTests.CategoryTests.Queries;
 
@@ -20,7 +17,9 @@ public class Test4GetAllCategories
     private readonly IMapper _mapper;
     private readonly ITestOutputHelper _outputHelper;
 
-    public Test4GetAllCategories(MyTestFixture fixture, ITestOutputHelper outputHelper)
+    public Test4GetAllCategories(
+        MyTestFixture fixture, 
+        ITestOutputHelper outputHelper)
     {
         _context = fixture.DbContext;
         _mapper = fixture.Mapper;
@@ -29,12 +28,11 @@ public class Test4GetAllCategories
 
 
     [Fact]
-    public async Task ReturnsCorrectData()
+    public async Task Returns_CorrectData()
     {
-        // Prepare
+        // Arrange
         var query = new GetAllCategoryQuery();
         var handler = new GetAllCategoryQueryHandler(_context, _mapper);
-
 
         // Act
         var result = await handler.Handle(query, CancellationToken.None);
@@ -47,13 +45,12 @@ public class Test4GetAllCategories
         result.Should().BeOfType<AllCategoriesDto>();
         _outputHelper.WriteLine("-- is of the correct type.");
 
-
         // Assert - 3
-        result.Categories.Should().HaveCount(0);            // no data has been seeded in the Categories Table
+        result.Categories.Should().HaveCount(ApplicationDbContextInitializer.SeededNoOfCategories);
         _outputHelper.WriteLine("-- has the correct number of rows after database seeding.");
 
-
-        _outputHelper.WriteLine("Successfully completed : {0}!.", nameof(ReturnsCorrectData));
+        _outputHelper.WriteLine(string.Empty);
+        _outputHelper.WriteLine("Successfully completed : {0}!.", nameof(Returns_CorrectData));
     }
 
 }

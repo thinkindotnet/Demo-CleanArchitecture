@@ -1,10 +1,9 @@
-﻿using AutoMapper;
-
-using MyApp.Application.ManageCategoriesFeature.DTOs;
+﻿using MyApp.Application.ManageCategoriesFeature.DTOs;
 using MyApp.Domain.Entities;
 using MyApp.xUnitTests.Common;
 
-namespace MyApp.xUnitTests;
+
+namespace MyApp.xUnitTests.CommonTests;
 
 
 // Integration Test between the Domain Models and Application Models
@@ -12,7 +11,9 @@ namespace MyApp.xUnitTests;
 public class MappingTests
     : IClassFixture<MappingFixture>
 {
+
     private readonly IMapper _mapper;
+
 
     public MappingTests(MappingFixture fixture)
     {
@@ -23,7 +24,7 @@ public class MappingTests
     [Fact]
     public void ShouldHaveValidConfiguration()
     {
-        // Prepare
+        // Arrange
 
         // Act
 
@@ -39,7 +40,7 @@ public class MappingTests
     // [InlineData(typeof(Product), typeof(ProductDto))]
     public void ShoudSupportMappingFromSourceToDestination(Type source, Type destination)
     {
-        // Prepare
+        // Arrange
         var instanceOfSource = Activator.CreateInstance(source);
 
         // Act

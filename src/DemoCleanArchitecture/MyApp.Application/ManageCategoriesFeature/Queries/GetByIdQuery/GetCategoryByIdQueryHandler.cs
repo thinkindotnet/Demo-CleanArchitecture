@@ -1,19 +1,17 @@
-﻿
-using AutoMapper;
-
-using MediatR;
-
-using MyApp.Application.Common.Exceptions;
+﻿using MyApp.Application.Common.Exceptions;
 using MyApp.Application.Common.Interfaces;
 using MyApp.Application.ManageCategoriesFeature.DTOs;
 
+
 namespace MyApp.Application.ManageCategoriesFeature.Queries.GetByIdQuery;
+
 
 public class GetCategoryByIdQueryHandler
     : IRequestHandler<GetCategoryByIdQuery, CategoryDto>
 {
-    public readonly IApplicationDbContext _dbContext;
-    public readonly IMapper _mapper;
+
+    private readonly IApplicationDbContext _dbContext;
+    private readonly IMapper _mapper;
 
 
     public GetCategoryByIdQueryHandler(
@@ -27,7 +25,9 @@ public class GetCategoryByIdQueryHandler
 
     #region IRequestHandler members
 
-    public async Task<CategoryDto> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
+    public async Task<CategoryDto> Handle(
+        GetCategoryByIdQuery request, 
+        CancellationToken cancellationToken)
     {
         var entity 
             = await _dbContext.Categories
@@ -38,4 +38,5 @@ public class GetCategoryByIdQueryHandler
     }
 
     #endregion
+
 }

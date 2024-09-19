@@ -1,11 +1,13 @@
-﻿using MyApp.Application.Common.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+
+using MyApp.Application.Common.Interfaces;
 
 
-namespace MyApp.Application.ManageCategoriesFeature.Commands.CreateCommand;
+namespace MyApp.Application.ManageCategoriesFeature.Commands.UpdateCommand;
 
 
-public class CreateCategoryCommandValidator
-    : AbstractValidator<CreateCategoryCommand>
+public class UpdateCategoryCommandValidator
+    : AbstractValidator<UpdateCategoryCommand>
 {
 
     private readonly IApplicationDbContext _dbContext;
@@ -17,7 +19,7 @@ public class CreateCategoryCommandValidator
     public const string ErrorMsg4NullOrEmptyCategoryName = "'Category Name' must not be empty.";
 
 
-    public CreateCategoryCommandValidator(
+    public UpdateCategoryCommandValidator(
         IApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
@@ -26,19 +28,25 @@ public class CreateCategoryCommandValidator
             .MaximumLength(50)
                 .WithMessage(ErrorMsg4CategoryNameLength)
             .NotEmpty()
-                .WithErrorCode(ErrorMsg4NullOrEmptyCategoryName)
+                .WithErrorCode(ErrorMsg4NullOrEmptyCategoryName);
+
+        RuleFor(v => v)
             .MustAsync(BeUniqueName)
                 .WithMessage(ErrorMsg4DuplicateCategoryName)
                 .WithErrorCode(ErrorCode4DuplicateName);
     }
 
 
-    public async Task<bool> BeUniqueName(
-        string name, 
+    public async Task<bool> BeUniqueName( 
+        UpdateCategoryCommand cmd, 
         CancellationToken cancellationToken)
     {
-        return await _dbContext.Categories
-                               .AllAsync(e => e.CategoryName != name, cancellationToken);
+        var isFound 
+            = await _dbContext.Categories
+                .AnyAsync(e => e.CategoryId != cmd.CategoryId 
+                               && e.CategoryName == cmd.CategoryName, cancellationToken);
+
+        return isFound == false;
     }
 
 }

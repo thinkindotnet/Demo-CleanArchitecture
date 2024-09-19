@@ -1,8 +1,13 @@
 ﻿namespace MyApp.Application.Common.Exceptions;
 
+
+/// <summary>
+///     Represents the error if a queried object by a particular key is null (not found).
+/// </summary>
 public class MyNotFoundException
     : ApplicationException
 {
+
     /// <summary>
     ///     Initializes a new instance of the NotFoundException class 
     ///     with the specified name of the queried object and its key.

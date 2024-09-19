@@ -1,10 +1,9 @@
-﻿using AutoMapper;
-
-using MyApp.Application.Common.Mappings;
-using MyApp.Infrastructure.Data;
+﻿using MyApp.Infrastructure.Data;
 using MyApp.xUnitTests.Mocks;
 
+
 namespace MyApp.xUnitTests.Common;
+
 
 public class MyTestFixture
     : IDisposable

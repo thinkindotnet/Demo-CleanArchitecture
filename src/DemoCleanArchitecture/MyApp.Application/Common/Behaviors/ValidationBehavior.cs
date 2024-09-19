@@ -1,14 +1,15 @@
-﻿
-using FluentValidation;
+﻿using MyApp.Application.Common.Exceptions;
 
-using MediatR;
-
-using Microsoft.Extensions.Logging;
-
-using MyApp.Application.Common.Exceptions;
 
 namespace MyApp.Application.Common.Behaviors;
 
+
+/// <summary>
+///     Custom Validation Behavior middleware 
+///     to generate MyValidationException object from the ModelState Errors.
+/// </summary>
+/// <typeparam name="TRequest">Request pipeline object.</typeparam>
+/// <typeparam name="TResponse">Response pipeline object.</typeparam>
 public class ValidationBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
@@ -52,4 +53,5 @@ public class ValidationBehavior<TRequest, TResponse>
     }
 
     #endregion
+
 }

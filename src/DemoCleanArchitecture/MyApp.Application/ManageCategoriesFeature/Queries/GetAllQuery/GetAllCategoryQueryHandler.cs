@@ -1,13 +1,11 @@
-﻿
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-
-using MediatR;
+﻿using AutoMapper.QueryableExtensions;
 
 using MyApp.Application.Common.Interfaces;
 using MyApp.Application.ManageCategoriesFeature.DTOs;
 
+
 namespace MyApp.Application.ManageCategoriesFeature.Queries.GetAllQuery;
+
 
 public class GetAllCategoryQueryHandler
     : IRequestHandler<GetAllCategoryQuery, AllCategoriesDto>
@@ -16,6 +14,7 @@ public class GetAllCategoryQueryHandler
     private readonly IApplicationDbContext _dbContext;
     private readonly IMapper _mapper;
 
+
     public GetAllCategoryQueryHandler(
         IApplicationDbContext dbContext, 
         IMapper mapper)
@@ -23,7 +22,6 @@ public class GetAllCategoryQueryHandler
         _dbContext = dbContext;
         _mapper = mapper;
     }
-
     
 
     #region IRequestHandler members

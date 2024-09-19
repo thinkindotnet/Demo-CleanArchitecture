@@ -1,13 +1,12 @@
 ﻿using System.Reflection;
 
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
 using MyApp.Application.Common.Interfaces;
 using MyApp.Domain.Entities;
-using MyApp.Infrastructure.Data.Interceptors;
+using MyApp.Infrastructure.Interceptors;
+
 
 namespace MyApp.Infrastructure.Data;
+
 
 public class ApplicationDbContext
     : IdentityDbContext, IApplicationDbContext
@@ -38,6 +37,7 @@ public class ApplicationDbContext
 
         base.OnConfiguring(optionsBuilder);
     }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

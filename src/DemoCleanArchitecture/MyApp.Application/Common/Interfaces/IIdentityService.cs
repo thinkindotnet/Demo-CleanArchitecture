@@ -11,4 +11,9 @@ public interface IIdentityService
 
     Task<Result> DeleteUserAsync(string userId);
 
+
+    Task<bool> IsInRoleAsync(string userId, string role);
+
+
+    Task<bool> AuthorizeAsync(string userId, string policyName);
 }

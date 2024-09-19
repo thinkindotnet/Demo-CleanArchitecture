@@ -1,5 +1,6 @@
 ﻿namespace MyApp.Domain.Common;
 
+
 public abstract class AuditableEntity
 {
 
@@ -10,6 +11,6 @@ public abstract class AuditableEntity
 
     public string? LastModifiedBy { get; set; }
 
-    public DateTime LastModifiedAtUtc { get; set; }
+    public DateTime? LastModifiedAtUtc { get; set; }
 
 }

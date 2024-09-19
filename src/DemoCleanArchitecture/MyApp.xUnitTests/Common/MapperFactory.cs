@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿using MyApp.Application.Common.Mappings;
 
-using MyApp.Application.Common.Mappings;
 
 namespace MyApp.xUnitTests.Common;
+
 
 public static class MapperFactory
 {
