@@ -40,12 +40,12 @@ public class MappingTests
     public void ShoudSupportMappingFromSourceToDestination(Type source, Type destination)
     {
         // Prepare
-        var instance = Activator.CreateInstance(source, destination);
+        var instanceOfSource = Activator.CreateInstance(source);
 
         // Act
 
-        // Assert
-        _mapper.Map(instance, source, destination);
+        // Assert if the Source Type members can be mapped to the Destination Type members.
+        _mapper.Map(instanceOfSource, source, destination);
     }
 
 }
